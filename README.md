@@ -118,11 +118,11 @@ Whether you're new to MongoDB or brushing up on NoSQL skills, this repo might he
 	- Structuerd => a data thatha
 	- simi-Structured
 	- Un-Structured
-	| Data   		 | Description |
-	|----------------|-------------|
-	| Structuerd     |Data that has a formal structure like |
-	| simi-Structured|Data that is structure and un-structre in the same time (Facebook Posts , Emails) , JSON / XML         |
-	| Un-Structured  |Data that has no formal structure like  images , reports ..etc |
+| Data   		 | Description |
+|----------------|-------------|
+| Structuerd     |Data that has a formal structure like |
+| simi-Structured|Data that is structure and un-structre in the same time (Facebook Posts , Emails) , JSON / XML         |
+| Un-Structured  |Data that has no formal structure like  images , reports ..etc |
 
 	- NoSql databases are suitable for simi and un structured data
 	- Sql databases are suitable for structured data
@@ -167,8 +167,8 @@ Whether you're new to MongoDB or brushing up on NoSQL skills, this repo might he
 | **Real-Time Applications**| Suitable for applications requiring complex transactions and joins.                | Optimized for fast read/write operations, ideal for real-time applications. |
 | **Big Data**              | Can handle large datasets but may require sharding or partitioning.               | Designed to handle large datasets with ease, often used in big data applications. |
 
-![img](https://imgur.com/a/lynXKlV)
-![img](https://imgur.com/a/h7WeMj1)
+![img](https://i.imgur.com/Viqs3rL.png)
+![img](https://i.imgur.com/aoZSZ7L.png)
 
 
 
