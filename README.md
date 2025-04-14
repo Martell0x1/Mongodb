@@ -115,17 +115,17 @@ Whether you're new to MongoDB or brushing up on NoSQL skills, this repo might he
 
 
 - Types of data:
-	- Structuerd => a data thatha
-	- simi-Structured
-	- Un-Structured
+- Structuerd => a data thatha
+- simi-Structured
+- Un-Structured
 | Data   		 | Description |
 |----------------|-------------|
 | Structuerd     |Data that has a formal structure like |
 | simi-Structured|Data that is structure and un-structre in the same time (Facebook Posts , Emails) , JSON / XML         |
 | Un-Structured  |Data that has no formal structure like  images , reports ..etc |
 
-	- NoSql databases are suitable for simi and un structured data
-	- Sql databases are suitable for structured data
+- NoSql databases are suitable for simi and un structured data
+- Sql databases are suitable for structured data
 
 - Important Notes
 
