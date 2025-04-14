@@ -118,6 +118,7 @@ Whether you're new to MongoDB or brushing up on NoSQL skills, this repo might he
 - Structuerd => a data thatha
 - simi-Structured
 - Un-Structured
+
 | Data   		 | Description |
 |----------------|-------------|
 | Structuerd     |Data that has a formal structure like |
