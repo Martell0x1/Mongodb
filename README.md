@@ -173,3 +173,150 @@ Whether you're new to MongoDB or brushing up on NoSQL skills, this repo might he
 
 
 
+---
+
+## Mongodb Basics
+
+- Mongodb database contains collections , each collection contains documents
+- like RDBMS each database contains tables , each table contain rows
+
+- the document is a JSON files , actually it's BSON files , each file is unified via `_id` it's like the primary key in the table
+- but the `_id` (GUID) is created randomly using some kind of algorithms that it cannot be gussable
+
+- Bson It is a computer data interchange format used mainly as a data storage and network transfer format in the MongoDB database.
+• It is a binary form for representing simple data structures .
+• BSON is faster to scan for specific fields than JSON.
+• BSON adds some additional types such as a date data type and a byte-array (bindata) datatype.
+• Client drivers serialize data to BSON, then transmit the data over the wire to the db.
+• Data is stored on disk in BSON format. Thus, on a retrieval, the database does
+ very little translation to send anobject out, allowing high efficiency.
+• The client driver unserialized a received BSON object to its native language
+ format.
+
+
+## Mongodb Getting started
+
+- mongodb is cross-platform DBMS , so it's available in numeros of platrofrms
+
+### Windows
+- For windows folks , head and download the [mongodb Community edition](https://www.mongodb.com/try/download/community)
+
+- Create file to hold the data (Default: C:\data)
+
+- Run your mongo server by navigating to your extracted(C:\Program Files\Mongodb) file > bin >
+- Run: `mongod.exe –dbpath` mongod stands for “Mongo Daemon”. mongod is a background process used by MongoDB. The main
+purpose of mongod is to manage all the MongoDB server tasks.
+- Run your mongo shell
+- Run: mongo.exe to run queries.
+- Mongo shell is a command line shell that can interact with the client (for example, system administrators
+and developers).
+
+### Linux
+
+- select your distro and hit download
+- install the package with your package manager (dpkg for debian based distros for instance)
+- `dpkg -i path_to_mongodb.deb`
+
+```
+# Start the MongoDB service
+sudo systemctl start mongod
+
+# Optional: Enable it to run on boot
+sudo systemctl enable mongod
+
+# Check the status
+sudo systemctl status mongod
+```
+
+- to interact with mongo use `mongosh`
+
+### Docker
+- this is the way i perfer to deal with any new technology / software i learn espicially databases.
+- now we have tow different ways the first one is download the server image and then finding any other software to interact with this server , the other one is download the image and interacting with the server itself via `mongosh`
+
+- let's go for first option
+- pull the image `docker pull mongo`
+- or simply run the `docker run` command , it will download the image if it's not exists on your local machine
+```
+docker run -d \
+--name mongo-server \
+-e MONGO_INITDB_ROOT_USERNAME=mongoadmin \
+-e MONGO_INITDB_ROOT_PASSWORD=LikeAndSubscribe \
+-p 27017:27017 \
+-v mongodemo:/data/db \
+mongo:latest
+```
+- now this will make a container named mongo-server with some envrionment variables (username , password) to authenticate to the database server , then we forward the port from `docker_container_ip:27017` to `localhost/127.0.0.1:27017`
+
+- the `-v` option is used to specify the storage of this container will be in the `/data/db` , this is recommended as when we delete the container the data inside of it will be removed as well ,so we keep that data persistant on our local machine.
+
+- now if you `docker ps -a` you should see that mongo-server is up and running.
+- now you can connect and interact with the server via different softwares (Studio 3T , NoSqlBooster , Robo 3T)
+- if you a `cmd` guy you can download `mongosh` and connect to your db server
+- for debian based linux :
+```
+curl -fsSL https://pgp.mongodb.com/server-6.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor
+echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+sudo apt update
+sudo apt install -y mongodb-mongosh
+
+```
+
+- connect using `mongosh "mongodb://<username>:<password>@localhost:27017"`
+
+- if you a `GUI` guy you can use mongo extention in vscode
+
+- hmm... things are little missy right?
+- well , we can use `docker compose` to fire it up
+```
+version: '3.8'
+services:
+  mongo: 
+    image: mongo:7.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongadmin
+      MONGO_INITDB_ROOT_PASSWORD: pass
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/data/db
+volumes:
+  mongodata:
+    driver: local
+```
+- execute `docker compose up -d` in the same directory of the yaml file.
+
+- please note:
+- if you saw something like this error:
+![img](https://i.imgur.com/EeHC82H.png)
+- it means that your CPU is a little bit old and don't support AVX  instructions (idk wtf is this)
+- you should use older version of mongodb like 4.4
+```
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongadmin
+      MONGO_INITDB_ROOT_PASSWORD: pass
+
+volumes:
+  mongodata:
+
+```
+
+- you can use the above build.
+
+### Basic commands
+
+- `show dbs` shows available databases.
+- the `admin , config , local` databases are system databases.
+- `db` shows your curretn database , default is `test`
+- `use db` switch db (if exists) or create a new one if it doesn't exists (to see the new created database it must contain atleast one collection otherwise it will created in memory)
+
+- `db.dropDatabase()` drops the database i'm currently use
+- see more examples in the `Mongo Demo.txt` file (ITI)
